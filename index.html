@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <title>Sudoku Solver</title>
+</head>
+
+<body>
+    
+<div id="sudoku_board">
+    <table id="sudoku_table">
+        <caption class="text-center">Sudoku</caption>
+        <colgroup><col><col><col>
+        <colgroup><col><col><col>
+        <colgroup><col><col><col>
+
+        <tbody>
+            <tr> 
+                <td class="row1"></td><td class="row1"></td><td class="row1"></td>
+                <td class="row1"></td><td class="row1"></td><td class="row1"></td>
+                <td class="row1"></td><td class="row1"></td><td class="row1"></td>
+            </tr>
+
+            <tr>
+                <td class="row2"></td><td class="row2"></td><td class="row2"></td>
+                <td class="row2"></td><td class="row2"></td><td class="row2"></td>
+                <td class="row2"></td><td class="row2"></td><td class="row2"></td>
+            </tr>
+
+            <tr>
+                <td class="row3"></td><td class="row3"></td><td class="row3"></td>
+                <td class="row3"></td><td class="row3"></td><td class="row3"></td>
+                <td class="row3"></td><td class="row3"></td><td class="row3"></td>
+            </tr>
+        </tbody>
+
+        <tbody>
+            <tr id="row4"> 
+                <td class="row4"></td><td class="row4"></td><td class="row4"></td>
+                <td class="row4"></td><td class="row4"></td><td class="row4"></td>
+                <td class="row4"></td><td class="row4"></td><td class="row4"></td>
+            </tr>
+
+            <tr id="row5">
+                <td class="row5"></td><td class="row5"></td><td class="row5"></td>
+                <td class="row5"></td><td class="row5"></td><td class="row5"></td>
+                <td class="row5"></td><td class="row5"></td><td class="row5"></td>
+            </tr>
+
+            <tr id="row6">
+                <td class="row6"></td><td class="row6"></td><td class="row6"></td>
+                <td class="row6"></td><td class="row6"></td><td class="row6"></td>
+                <td class="row6"></td><td class="row6"></td><td class="row6"></td>
+            </tr>
+        </tbody>
+
+        <tbody>
+            <tr id="row7"> 
+                <td class="row7"></td><td class="row7"></td><td class="row7"></td>
+                <td class="row7"></td><td class="row7"></td><td class="row7"></td>
+                <td class="row7"></td><td class="row7"></td><td class="row7"></td>
+            </tr>
+
+            <tr id="row8">
+                <td class="row8"></td><td class="row8"></td><td class="row8"></td>
+                <td class="row8"></td><td class="row8"></td><td class="row8"></td>
+                <td class="row8"></td><td class="row8"></td><td class="row8"></td>
+            </tr>
+
+            <tr id="row9">
+                <td class="row9"></td><td class="row9"></td><td class="row9"></td>
+                <td class="row9"></td><td class="row9"></td><td class="row9"></td>
+                <td class="row9"></td><td class="row9"></td><td class="row9"></td>
+            </tr>
+        </tbody>
+
+      </table>
+
+</div>
+
+<div class="text-center">
+    <button type="button" id="solve_button" class="btn btn-success !important">Solve</button>
+    <button type="button" id="clear_button" class="btn btn-danger">Clear</button>
+    <button type="button" id="new_button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">New Board</button>
+</div>
+
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Enter New Board</h4>
+      </div>
+      <div class="modal-body">
+        
+        <table id="modal-table">
+
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+
+            <tbody>
+                <tr>
+                    <td><input type="number" name="a9" id="a9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b9" id="b9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c9" id="c9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d9" id="d9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e9" id="e9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f9" id="f9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g9" id="g9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h9" id="h9" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i9" id="i9" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a8" id="a8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b8" id="b8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c8" id="c8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d8" id="d8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e8" id="e8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f8" id="f8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g8" id="g8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h8" id="h8" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i8" id="i8" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a7" id="a7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b7" id="b7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c7" id="c7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d7" id="d7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e7" id="e7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f7" id="f7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g7" id="g7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h7" id="h7" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i7" id="i7" max="9" min="0" value="0" size="2"></td>
+                </tr>
+            </tbody>
+
+            <tbody>
+                <tr>
+                    <td><input type="number" name="a6" id="a6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b6" id="b6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c6" id="c6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d6" id="d6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e6" id="e6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f6" id="f6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g6" id="g6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h6" id="h6" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i6" id="i6" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a5" id="a5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b5" id="b5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c5" id="c5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d5" id="d5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e5" id="e5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f5" id="f5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g5" id="g5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h5" id="h5" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i5" id="i5" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a4" id="a4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b4" id="b4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c4" id="c4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d4" id="d4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e4" id="e4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f4" id="f4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g4" id="g4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h4" id="h4" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i4" id="i4" max="9" min="0" value="0" size="2"></td>
+                </tr>
+            </tbody>
+
+            <tbody>
+                <tr>
+                    <td><input type="number" name="a3" id="a3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b3" id="b3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c3" id="c3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d3" id="d3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e3" id="e3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f3" id="f3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g3" id="g3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h3" id="h3" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i3" id="i3" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a2" id="a2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b2" id="b2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c2" id="c2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d2" id="d2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e2" id="e2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f2" id="f2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g2" id="g2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h2" id="h2" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i2" id="i2" max="9" min="0" value="0" size="2"></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="a1" id="a1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="b1" id="b1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="c1" id="c1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="d1" id="d1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="e1" id="e1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="f1" id="f1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="g1" id="g1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="h1" id="h1" max="9" min="0" value="0" size="2"></td>
+                    <td><input type="number" name="i1" id="i1" max="9" min="0" value="0" size="2"></td>
+                </tr>
+            </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+          <div class="text-center">
+            <button type="button" class="btn btn-success" id="new_board_button" data-dismiss="modal">Submit</button>
+            <button type="button" class="btn btn-warning" id="clear_new_button">Clear</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+    
+<script type="text/javascript" src="sudoku.js"></script> 
+</body>
+</html>

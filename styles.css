@@ -1,0 +1,48 @@
+caption {
+    font-size: 30px;
+}
+
+table { 
+    border-collapse: collapse; 
+    font-family: Calibri, sans-serif; 
+}
+
+colgroup, tbody {
+    border: solid medium; 
+}
+
+td {
+    border: solid thin;
+    height: 2.4em; 
+    width: 2.4em; 
+    text-align: center; 
+    padding: 0; 
+}
+
+#sudoku_table{
+    margin: 0 auto;
+}
+
+#sudoku_board{
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+#solve_button, #clear_button {
+    margin-right: 15px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+    border: none;
+    text-align: center;
+}
+
+#modal-body {
+    width: 100%;
+}
+
+#modal-table{
+    margin: 0 auto;
+}
